@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour{
     public int _jumpCount = 2;
     [SerializeField]
     private LayerMask _groundLayer;
-    private float _checkRadius = 0.04f;
+    private float _checkRadius = 0.1f;
     public bool _isGrounded = true;
     [SerializeField]
     private GameObject _groundChecker;
@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour{
 
     private void Update(){
         GroundCheck();
-        if(_playerAttack._attacking == false){
+        if(_playerAttack._attacking == false && _playerAttack._defensing == false){
             Move();
             Jump();
         }
@@ -83,13 +83,14 @@ public class PlayerMove : MonoBehaviour{
             }
             _rb.velocity = moveDirection;
         }
-        else if(_rb.velocity.x > 0.5 || _rb.velocity.x < -0.5){
+        /*else if(_rb.velocity.x > 0.5 || _rb.velocity.x < -0.5){*/
+        else{
             moveDirection = _rb.velocity;
-            if(_rb.velocity.x > 0){
-                moveDirection.x -= 5f*Time.deltaTime;
+            if(_rb.velocity.x > 0.1){
+                moveDirection.x -= 15f*Time.deltaTime;
             }
-            else if(_rb.velocity.x < 0){
-                moveDirection.x += 5f*Time.deltaTime;
+            else if(_rb.velocity.x < -0.1){
+                moveDirection.x += 15f*Time.deltaTime;
             }
             else{
                 moveDirection.x = 0f;
