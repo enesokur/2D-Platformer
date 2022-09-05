@@ -40,6 +40,7 @@ public class Hook : MonoBehaviour{
             Vector3 rayCastDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position,rayCastDirection.normalized);
             if(hit){
+                Debug.Log(hit.transform.name);
                 _hitPosition = hit.point;
                 if(_player.transform.localScale.x == 1 && Camera.main.ScreenToWorldPoint(Input.mousePosition).x - _player.transform.position.x > 1f ||
                     _player.transform.localScale.x == -1 && Camera.main.ScreenToWorldPoint(Input.mousePosition).x - _player.transform.position.x < -1f)
